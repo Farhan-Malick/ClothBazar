@@ -10,7 +10,7 @@ namespace ClothBazar.Entities
     {
         public decimal Price { get; set; }
 
-        //defining relationship with obj
+        //defining relationship
         public Category Category { get; set; }
     }
 }
