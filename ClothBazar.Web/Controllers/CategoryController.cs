@@ -1,6 +1,6 @@
 ﻿using ClothBazar.Entities;
 using ClothBazar.Services;
-using System;
+using System;   
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,10 +16,11 @@ namespace ClothBazar.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            var categories = categoryService.GetCategories();
 
-            return View();
+            return View(categories);
         }
-
+        //Create
         [HttpGet]
         public ActionResult Create()
         {
@@ -30,7 +31,35 @@ namespace ClothBazar.Web.Controllers
         public ActionResult Create(Category category)
         {
             categoryService.SaveCategory(category);
-            return View();
+            return RedirectToAction("Index");
+        }
+        //EDIT
+        [HttpGet]
+        public ActionResult Edit(int ID)
+        {
+            var category = categoryService.GetCategory(ID);
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Category category)
+        {
+            categoryService.UpdateCategory(category);
+            return RedirectToAction("Index");
+        }
+        //DELETE
+        [HttpGet]
+        public ActionResult Delete(int ID)
+        {
+            var category = categoryService.GetCategory(ID);
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Category category)
+        {
+            categoryService.DeleteCategory(category.ID);
+            return RedirectToAction("Index");
         }
     }
 }

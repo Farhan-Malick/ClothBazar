@@ -10,11 +10,48 @@ namespace ClothBazar.Services
 {
     public class CategoriesService 
     {
+       
+
+        public List<Category> GetCategories()
+        {
+            using (var context = new CBContext())
+            {
+                return context.Categories.ToList();
+            }
+        }
+
         public void SaveCategory(Category category)
         {
             using (var context = new CBContext())
             {
                 context.Categories.Add(category);
+                context.SaveChanges();
+            }
+        }
+        //EDIT
+        public Category GetCategory(int ID)
+        {
+            using (var context = new CBContext())
+            {
+                return context.Categories.Find(ID);
+            }
+        }
+        //UPDATE
+        public void UpdateCategory(Category category)
+        {
+            using (var context = new CBContext())
+            {
+                context.Entry(category).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+        //Delete
+        public void DeleteCategory(int ID)
+        {
+            using (var context = new CBContext())
+            {
+                var category =  context.Categories.Find(ID);
+                context.Categories.Remove(category);
                 context.SaveChanges();
             }
         }
