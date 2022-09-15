@@ -8,49 +8,49 @@ using System.Threading.Tasks;
 
 namespace ClothBazar.Services
 {
-    public class CategoriesService 
+    public class ProductsService 
     {
 
-        public List<Category> GetCategories()
+        public List<Product> GetProducts()
         {
             using (var context = new CBContext())
             {
-                return context.Categories.ToList();
+                return context.Products.ToList();
             }
         }
 
-        public void SaveCategory(Category category)
+        public void SaveProduct(Product product)
         {
             using (var context = new CBContext())
             {
-                context.Categories.Add(category);
+                context.Products.Add(product);
                 context.SaveChanges();
             }
         }
         //EDIT
-        public Category GetCategory(int ID)
+        public Product GetProduct(int ID)
         {
             using (var context = new CBContext())
             {
-                return context.Categories.Find(ID);
+                return context.Products.Find(ID);
             }
         }
         //UPDATE
-        public void UpdateCategory(Category category)
+        public void UpdateProduct(Product product)
         {
             using (var context = new CBContext())
             {
-                context.Entry(category).State = System.Data.Entity.EntityState.Modified;
+                context.Entry(product).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
             }
         }
         //Delete
-        public void DeleteCategory(int ID)
+        public void DeleteProduct(int ID)
         {
             using (var context = new CBContext())
             {
-                var category =  context.Categories.Find(ID);
-                context.Categories.Remove(category);
+                var product =  context.Products.Find(ID);
+                context.Products.Remove(product);
                 context.SaveChanges();
             }
         }
